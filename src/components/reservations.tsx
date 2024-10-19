@@ -19,15 +19,32 @@ export function Reservations() {
   const [date, setDate] = useState<Date | undefined>()
   const [startTime, setStartTime] = useState<string>('')
   const [endTime, setEndTime] = useState<string>('')
+  const [timeError, setTimeError] = useState<string>('')
 
   function handleStartTimeChange(e: ChangeEvent<HTMLInputElement>) {
     const timeValue = e.target.value;
-    setStartTime(timeValue + ":00");
+    const isValidTime = validateTimeInRange(timeValue, "18:00", "23:59");
+  
+    if (isValidTime) {
+      setStartTime(timeValue + ":00");
+    } else {
+      setTimeError('Informe um horário entre 18h e 23:59')
+    }
   }
   
   function handleEndTimeChange(e: ChangeEvent<HTMLInputElement>) {
     const timeValue = e.target.value;
-    setEndTime(timeValue + ":00");
+    const isValidTime = validateTimeInRange(timeValue, "18:00", "23:59");
+  
+    if (isValidTime) {
+      setEndTime(timeValue + ":00");
+    } else {
+      alert("End time must be between 18:00 and 23:59");
+    }
+  }
+  
+  function validateTimeInRange(time: string, min: string, max: string): boolean {
+    return time >= min && time <= max;
   }
 
   async function createNewReservation(e: FormEvent<HTMLFormElement>) {
@@ -96,6 +113,8 @@ export function Reservations() {
                   type="time"
                   value={startTime}
                   onChange={handleStartTimeChange}
+                  min="18:00" 
+                  max="23:59"
                 />
               </div>
               <div className="space-y-1">
@@ -104,8 +123,11 @@ export function Reservations() {
                   type="time"
                   value={endTime}
                   onChange={handleEndTimeChange}
+                  min="18:00" 
+                  max="23:59"
                 />
               </div>
+              {timeError && <span className='font-semibold text-red-600'>{timeError}</span>}
           </CardContent>
           <CardFooter>
             <Button type="submit">Criar Reserva</Button>
