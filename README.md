@@ -1,50 +1,76 @@
-# React + TypeScript + Vite
+Aqui está o conteúdo do README que você pode utilizar:
+Projeto - Instruções de Inicialização
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este documento descreve os passos para rodar o projeto, fazer seed no banco de dados e configurar as variáveis de ambiente no arquivo .env.
+Requisitos
 
-Currently, two official plugins are available:
+Antes de começar, certifique-se de ter o seguinte instalado:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    Node.js (versão mínima: 16.x)
+    npm (versão mínima: 8.x)
 
-## Expanding the ESLint configuration
+Instalação
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+    Clone o repositório:
 
-- Configure the top-level `parserOptions` property like this:
+    bash
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+git clone <URL_DO_REPOSITORIO>
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Entre no diretório do projeto:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+bash
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+cd <NOME_DO_DIRETORIO>
+
+Instale as dependências:
+
+bash
+
+    npm install
+
+Rodando o Projeto
+
+Para iniciar o projeto em modo de desenvolvimento, utilize o seguinte comando:
+
+bash
+
+npm run dev
+
+O projeto estará rodando em: http://localhost:3000 (ou outra porta, dependendo da configuração).
+Seed do Banco de Dados
+
+Para popular o banco de dados com dados iniciais (seed), execute o comando:
+
+bash
+
+npm run seed
+
+Isso vai rodar o script de seed que preenche o banco com dados necessários para testes ou uso inicial.
+Variáveis de Ambiente
+
+Você precisará criar um arquivo .env na raiz do projeto com as seguintes variáveis:
+
+bash
+
+# Banco de Dados
+DB_HOST=<seu_host_de_banco>
+DB_USER=<seu_usuario_de_banco>
+DB_PASSWORD=<sua_senha_de_banco>
+DB_NAME=<nome_do_banco>
+
+# Porta do servidor
+PORT=3000
+
+# Outras variáveis
+JWT_SECRET=<seu_segredo_jwt>
+
+Certifique-se de substituir os valores <...> com as informações corretas para o seu ambiente.
+Scripts Disponíveis
+
+    npm run dev: Inicia o servidor em modo de desenvolvimento.
+    npm run seed: Popula o banco de dados com dados iniciais (seed).
+
+Contribuição
+
+Sinta-se à vontade para contribuir com este projeto através de pull requests.
