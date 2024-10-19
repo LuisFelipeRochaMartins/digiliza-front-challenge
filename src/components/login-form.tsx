@@ -6,11 +6,15 @@ import { Button } from './ui/button'
 import Cookies from 'js-cookie'
 import { useState, type FormEvent, type ChangeEvent } from 'react'
 import { validateUser } from '../http/login-user'
+import { useNavigate } from 'react-router-dom'
+import { createUser } from '../http/create-user'
 
 export function LoginForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+
+  const navigate = useNavigate()
 
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -20,8 +24,8 @@ export function LoginForm() {
     if (!token) {
       throw new Error('Invalid or expired JWT token')
     }
-
     Cookies.set('jwt_token', token, { expires: 1 / 12, sameSite: 'strict' })
+    navigate('/reservations')
   }
 
   async function registerNewUser(e: FormEvent<HTMLFormElement>) {
@@ -34,13 +38,14 @@ export function LoginForm() {
       setError('As senhas não são iguais!')
     }
 
-    const token = await validateUser({ username, password })
+    const token = await createUser({ username, password })
 
     if (!token) {
       throw new Error()
     }
 
     Cookies.set('jwt_token', token, { expires: 1 / 12, sameSite: 'strict' })
+    navigate('/reservations')
   }
 
   function handleChangeUsername(e: ChangeEvent<HTMLInputElement>) {
@@ -143,6 +148,7 @@ export function LoginForm() {
                 </Label>
                 <Input
                   name="confirmPassword"
+                  type='password'
                   className="text-md font-semibold"
                   maxLength={16}
                 />
