@@ -37,40 +37,14 @@ bash
 
 npm run dev
 
-O projeto estará rodando em: http://localhost:3000 (ou outra porta, dependendo da configuração).
+O projeto estará rodando em: http://localhost:5173 (ou outra porta, dependendo da configuração).
 Seed do Banco de Dados
 
-Para popular o banco de dados com dados iniciais (seed), execute o comando:
 
 bash
-
-npm run seed
-
-Isso vai rodar o script de seed que preenche o banco com dados necessários para testes ou uso inicial.
-Variáveis de Ambiente
-
-Você precisará criar um arquivo .env na raiz do projeto com as seguintes variáveis:
-
-bash
-
-# Banco de Dados
-DB_HOST=<seu_host_de_banco>
-DB_USER=<seu_usuario_de_banco>
-DB_PASSWORD=<sua_senha_de_banco>
-DB_NAME=<nome_do_banco>
-
-# Porta do servidor
-PORT=3000
-
-# Outras variáveis
-JWT_SECRET=<seu_segredo_jwt>
 
 Certifique-se de substituir os valores <...> com as informações corretas para o seu ambiente.
 Scripts Disponíveis
 
     npm run dev: Inicia o servidor em modo de desenvolvimento.
-    npm run seed: Popula o banco de dados com dados iniciais (seed).
 
-Contribuição
-
-Sinta-se à vontade para contribuir com este projeto através de pull requests.

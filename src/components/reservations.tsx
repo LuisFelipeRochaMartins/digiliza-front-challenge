@@ -12,6 +12,7 @@ import { PopoverContent } from './ui/popover'
 import { Calendar } from './ui/calendar'
 import { ReservationList } from './reservation-list'
 import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 
 export function Reservations() {
@@ -20,6 +21,8 @@ export function Reservations() {
   const [startTime, setStartTime] = useState<string>('')
   const [endTime, setEndTime] = useState<string>('')
   const [timeError, setTimeError] = useState<string>('')
+
+  const navigate = useNavigate()
 
   function handleStartTimeChange(e: ChangeEvent<HTMLInputElement>) {
     const timeValue = e.target.value;
@@ -48,6 +51,7 @@ export function Reservations() {
   }
 
   async function createNewReservation(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     const reservation = {capacity, date: date?.toISOString().slice(0,10), startDate: startTime, endDate: endTime}
     const response = await fetch('http://localhost:8080/reservations', {
       method: 'POST',
@@ -57,8 +61,8 @@ export function Reservations() {
       },
       body: JSON.stringify(reservation)
     })
-
-    return await response.json()
+    
+    window.location.reload()
   }
 
   return (
